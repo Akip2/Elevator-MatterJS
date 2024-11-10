@@ -1,0 +1,28 @@
+* { padding: 0; margin: 0; font-family: 'Roboto', Helvetica, Arial, Lucida, sans-serif;}
+
+body{
+    background-color: rgb(18, 31, 31);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#global-container{
+    display: flex;
+    flex-direction: row;
+    height: 95%;
+    justify-content: center;
+}
+
+#stage{
+    height: 100%;
+    background-color: green;
+}
+
+#btn-container{
+    min-width: 20%;
+    display: grid;
+
+    grid-template-columns: repeat(1, 5fr);
+}
