@@ -1,27 +1,21 @@
 import { initializeModel } from "./model.js";
 import { Elevator } from "./elevator.js";
-
 import { Engine, Render,Runner,Bodies,Composite, World} from "./physics.js";
-
-import { width, height, stageSize, stageSpacing, elevatorHeight, elevatorWidth, getParameters } from "./parameters.js";
+import { width, height, stageSize, stageSpacing, elevatorHeight, elevatorWidth, getParameters, gravity, maxSpeed, minSpeed } from "./parameters.js";
 
 let objects=[];
 let elevator;
 let engine, runner, render;
 
-
-
 const canvasContainer=document.querySelector("#canvas-container");
 const btnContainer=document.querySelector("#btn-container");
-
 
 
 function createSimulation(){
   getParameters();
 
-
   engine=Engine.create(); 
-  engine.gravity.y=1;
+  engine.gravity.y=gravity;
 
   runner= Runner.create(); 
   render = Render.create({
@@ -50,7 +44,7 @@ function createSimulation(){
   Runner.run(runner, engine);
 
 
-  elevator=new Elevator(elevatorObj);
+  elevator=new Elevator(elevatorObj, minSpeed, maxSpeed);
 
   btnContainer.innerHTML="";
   for(let i=0; i<stagesPos.length; i++){
@@ -99,14 +93,14 @@ function createStages(elevatorW, elevatorH, stageHeight, spacing){
     currentHeight=nextHeight;
     stagePositions.push(currentHeight);
 
-    const left=Bodies.rectangle(width/2-(elevatorW)-3, currentHeight+stageHeight/2, elevatorW, stageHeight, {
+    const left=Bodies.rectangle(width/2-(elevatorW)-5, currentHeight+stageHeight/2, elevatorW, stageHeight, {
       isStatic: true,
       render: {
         fillStyle: 'black',
       }
     });
 
-    const right=Bodies.rectangle((width/2)+elevatorW+3, currentHeight+stageHeight/2, elevatorW, stageHeight, {
+    const right=Bodies.rectangle((width/2)+elevatorW+5, currentHeight+stageHeight/2, elevatorW, stageHeight, {
       isStatic: true,
       render: {
         fillStyle: 'black',
@@ -125,7 +119,7 @@ function createStages(elevatorW, elevatorH, stageHeight, spacing){
 }
 
 function createElevator(elevatorWidth, elevatorHeight){
-  const elevator=Bodies.rectangle(width/2, height-elevatorHeight/2, elevatorWidth, elevatorHeight, {
+  const elevator=Bodies.rectangle(width/2, height-elevatorHeight/2-stageSize, elevatorWidth, elevatorHeight, {
     render: {
       fillStyle: 'darkblue',
     }

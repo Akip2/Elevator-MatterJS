@@ -1,19 +1,20 @@
 import { cam } from "./camera.js";
+import { gravity, height } from "./parameters.js";
 import { Body } from "./physics.js";
 
 export class Elevator{
-    constructor(object){
+    constructor(object, minSpeed, maxSpeed){
         this.object=object;
         this.motorActive=false;
         this.motorForce=0;
         this.currentMotorForce=0;
         this.currentStage=0;
-
+        this.maxSpeed=maxSpeed;
+        this.minSpeed=minSpeed;
         this.isMoving=false;
     }
 
     goToStage(number){
-        console.log("now go");
         this.isMoving=true;
 
         let stagePos=cam.getStagePos(number);
@@ -47,7 +48,11 @@ export class Elevator{
             else{
                 delta=Math.abs(delta);
 
-                let force=1.5+delta/185;
+                let force=this.maxSpeed-185/delta;     //1.5+delta/185;
+
+                if(force<this.minSpeed){
+                    force=this.minSpeed;
+                }
 
                 this.setMotorForce(force*direction);
             }
@@ -106,14 +111,14 @@ export class Elevator{
             let delta=position-cam.getElevatorPos();
             if(delta>=accuracy || delta<=-accuracy){
                 if(delta<0){
-                    this.setMotorForce(-0.55);
+                    this.setMotorForce(-0.55*gravity);
                 }
                 else{
-                    this.setMotorForce(0.05);
+                    this.setMotorForce(0.05*gravity);
                 }
             }
             else{
-                this.setMotorForce(-0.28);
+                this.setMotorForce(-0.28*gravity);
             }
  
             if (!this.motorActive || this.isMoving) {
