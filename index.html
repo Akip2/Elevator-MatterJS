@@ -9,7 +9,57 @@
 
     <body>
         <div id="global-container">
-            <canvas id="stage"></canvas>
+            <div id="parameters-container">
+                <h1>Elevator</h1>
+                <div class="parameter">
+                    <label for="elevator-width">Width:</label>
+                    <input id="elevator-width" value=35 name="elevator-width" type="number">
+                </div>
+
+                <div class="parameter">
+                    <label for="elevator-height">Height:</label>
+                    <input id="elevator-height" value=70 name="elevator-height" type="number">
+                </div>
+
+                <div class="parameter">
+                    <label for="elevator-minSpeed">Min Speed:</label>
+                    <input id="elevator-minSpeed" value=1 name="elevator-minSpeed type="number">
+                </div>
+
+                <div class="parameter">
+                    <label for="elevator-maxSpeed">Max Speed:</label>
+                    <input id="elevator-maxSpeed" value=4 name="elevator-maxSpeed type="number">
+                </div>
+
+                <hr>
+
+                <h1>Stages</h1>
+
+                <div class="parameter">
+                    <label for="stage-size">Ground size:</label>
+                    <input id="stage-size" value=20 name="stage-size" type="number">
+                </div>
+
+                <div class="parameter">
+                    <label for="stage-spacing">Stage heights:</label>
+                    <input id="stage-spacing" value=120 name="stage-spacing" type="number">
+                </div>
+
+                <hr>
+
+                <h1>Gravity</h1>
+                <div class="parameter">
+                    <label for="gravity">Gravity:</label>
+                    <input id="gravity" value=0.98 name="gravity" step="0.01" type="number">
+                </div>
+                <hr>
+
+                <button id="reload-btn">Reload</button>
+            </div>
+
+            <div id="canvas-container">
+
+            </div>
             
             <div id="btn-container">
 

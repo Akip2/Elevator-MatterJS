@@ -1,14 +1,16 @@
 import { cam } from "./camera.js";
-import { Body, engine } from "./physics.js";
+import { gravity, height } from "./parameters.js";
+import { Body } from "./physics.js";
 
 export class Elevator{
-    constructor(object){
+    constructor(object, minSpeed, maxSpeed){
         this.object=object;
         this.motorActive=false;
         this.motorForce=0;
         this.currentMotorForce=0;
         this.currentStage=0;
-
+        this.maxSpeed=maxSpeed;
+        this.minSpeed=minSpeed;
         this.isMoving=false;
     }
 
@@ -24,13 +26,13 @@ export class Elevator{
         if (delta < 0) {
             direction=-1;
         } else {
-            direction=0.5;
+            direction=0.8;
         }
     
         const intervalId = setInterval(() => {
             delta = Math.abs(stagePos - cam.getElevatorPos());
             
-            if (delta<=5) {
+            if (delta<=20) {
                 this.currentStage=number;
 
                 if(this.currentStage>0){
@@ -46,7 +48,11 @@ export class Elevator{
             else{
                 delta=Math.abs(delta);
 
-                let force=0.5+delta/180;
+                let force=this.maxSpeed-185/delta;     //1.5+delta/185;
+
+                if(force<this.minSpeed){
+                    force=this.minSpeed;
+                }
 
                 this.setMotorForce(force*direction);
             }
@@ -69,7 +75,7 @@ export class Elevator{
     }
 
     adjustMotorForce(){
-        const step=0.01;
+        const step=0.02;
 
         const intervalId = setInterval(() => {
             let delta=this.currentMotorForce-this.motorForce;
@@ -105,14 +111,14 @@ export class Elevator{
             let delta=position-cam.getElevatorPos();
             if(delta>=accuracy || delta<=-accuracy){
                 if(delta<0){
-                    this.setMotorForce(-0.45);
+                    this.setMotorForce(-0.55*gravity);
                 }
                 else{
-                    this.setMotorForce(0.05);
+                    this.setMotorForce(0.05*gravity);
                 }
             }
             else{
-                this.setMotorForce(-0.28);
+                this.setMotorForce(-0.28*gravity);
             }
  
             if (!this.motorActive || this.isMoving) {
