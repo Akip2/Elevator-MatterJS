@@ -1,11 +1,19 @@
 const width=800;
 const height=1600;
 
-const elevatorWidth=35;
-const elevatorHeight=80;
+let elevatorWidth=35;
+let elevatorHeight=70;
 
-const stageSize=20;
-const stageSpacing=elevatorHeight*1.6;
+let stageSize=20;
+let stageSpacing=120;
+
+function getParameters(){
+    elevatorWidth=Number(document.querySelector("#elevator-width").value);
+    elevatorHeight=Number(document.querySelector("#elevator-height").value);
+
+    stageSize=Number(document.querySelector("#stage-size").value);
+    stageSpacing=Number(document.querySelector("#stage-spacing").value);
+}
 
 export{
     width,
@@ -13,5 +21,6 @@ export{
     elevatorWidth,
     elevatorHeight,
     stageSize,
-    stageSpacing
+    stageSpacing,
+    getParameters
 }

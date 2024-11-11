@@ -15,14 +15,34 @@ body{
     justify-content: center;
 }
 
-#stage{
+canvas{
     height: 100%;
     background-color: green;
 }
 
 #btn-container{
-    min-width: 20%;
+    min-width: 50%;
     display: grid;
 
     grid-template-columns: repeat(1, 5fr);
+}
+
+#parameters-container{
+    display: flex;
+    flex-direction: column;
+
+    gap: 1em;
+
+    background-color: white;
+    min-width: 50%;
+    padding: 1%;
+
+    align-items:safe;
+
+}
+
+.parameter{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 }

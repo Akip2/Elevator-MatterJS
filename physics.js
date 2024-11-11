@@ -6,15 +6,12 @@ const Engine = Matter.Engine,
     World=Matter.World,
     Body=Matter.Body;
 
-const engine = Engine.create();
-engine.gravity.y=1;
-
 export{
     Engine,
-    engine,
     Render,
     Runner,
     Bodies,
+    World,
     Composite,
     Body
 }

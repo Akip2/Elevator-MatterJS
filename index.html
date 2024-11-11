@@ -9,7 +9,40 @@
 
     <body>
         <div id="global-container">
-            <canvas id="stage"></canvas>
+            <div id="parameters-container">
+                <h1>Elevator</h1>
+                <div class="parameter">
+                    <label for="elevator-width">Width:</label>
+                    <input id="elevator-width" value=35 name="elevator-width" type="number">
+                </div>
+
+                <div class="parameter">
+                    <label for="elevator-height">Height:</label>
+                    <input id="elevator-height" value=70 name="elevator-height" type="number">
+                </div>
+
+                <hr>
+
+                <h1>Stages</h1>
+
+                <div class="parameter">
+                    <label for="stage-size">Size:</label>
+                    <input id="stage-size" value=20 name="stage-size" type="number">
+                </div>
+
+                <div class="parameter">
+                    <label for="stage-spacing">Spacing:</label>
+                    <input id="stage-spacing" value=120 name="stage-spacing" type="number">
+                </div>
+
+                <hr>
+
+                <button id="reload-btn">Reload</button>
+            </div>
+
+            <div id="canvas-container">
+
+            </div>
             
             <div id="btn-container">
 
